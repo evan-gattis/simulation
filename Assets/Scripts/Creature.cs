@@ -17,6 +17,8 @@ abstract public class Creature : MonoBehaviour
     float targetInterval = 1f;
     float checkStateInterval = 0.5f;
     float eatRadius = 1.5f;
+    protected float starveTime = 30f;
+    float currentHungerTime;
     IEnumerator WanderRoutine()
     {
         while (true)
@@ -90,6 +92,15 @@ abstract public class Creature : MonoBehaviour
     {
         InvokeRepeating(nameof(checkState), 0f, checkStateInterval);
         InvokeRepeating(nameof(doAction), 0f, checkStateInterval);
+        currentHungerTime = starveTime;
+    }
+    private void Update()
+    {
+        currentHungerTime -= Time.deltaTime;
+        if(currentHungerTime <= 0f)
+        {
+            Die();
+        }
     }
     protected void SetEatStrategy(IEatStrategy strategy)
     {
@@ -103,6 +114,7 @@ abstract public class Creature : MonoBehaviour
     {
         if (this.eatStrategy == null) return;
         eatStrategy.eat(food);
+        currentHungerTime = starveTime;
     }
     private void Move(Vector3 target)
     {
@@ -143,6 +155,14 @@ abstract public class Creature : MonoBehaviour
                 StartTarget();
                 break;
         }
+    }
+    protected void Die()
+    {
+        Destroy(this.gameObject);
+    }
+    public GameObject GetCurrentTarget()
+    {
+        return currentTarget;
     }
 }
 

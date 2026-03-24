@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8275810971719572228
+--- !u!1 &6437125902758381261
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5264572660072246997}
-  - component: {fileID: 4539848992203578437}
-  - component: {fileID: 5127531787513125000}
-  - component: {fileID: 5243045582100656324}
-  - component: {fileID: 7556373115416027349}
-  - component: {fileID: -9217467958532323717}
-  m_Layer: 0
-  m_Name: Wolf
+  - component: {fileID: 7408606984308339046}
+  - component: {fileID: 5698205267044546366}
+  - component: {fileID: 2019432139207332403}
+  - component: {fileID: 2789288985155441314}
+  - component: {fileID: 8036370772195106602}
+  - component: {fileID: 208929493956844088}
+  m_Layer: 3
+  m_Name: Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5264572660072246997
+--- !u!4 &7408606984308339046
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -36,21 +36,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4539848992203578437
+--- !u!33 &5698205267044546366
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5127531787513125000
+--- !u!23 &2019432139207332403
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 680cd378b24b4f5449dd0072a4163325, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5243045582100656324
+--- !u!65 &2789288985155441314
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,30 +110,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7556373115416027349
+--- !u!114 &8036370772195106602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8cbeb6256df784a8572e7166f1fd35, type: 3}
+  m_Script: {fileID: 11500000, guid: 26cd3563ec2d50b4380faf6ba881969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshComponent: {fileID: -9217467958532323717}
---- !u!195 &-9217467958532323717
+  navMeshComponent: {fileID: 208929493956844088}
+--- !u!195 &208929493956844088
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275810971719572228}
+  m_GameObject: {fileID: 6437125902758381261}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

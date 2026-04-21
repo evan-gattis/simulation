@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarnivoreTargetStrategy : ITargetStrategy
+public class CarnivoreTargetStrategy : ITargetStrategy, IPreyObserver
 {
     private float detectionRadius = 20f;
     private int edibleCreaturesLayer = 1 << LayerMask.NameToLayer("EdibleCreature");
@@ -13,6 +13,12 @@ public class CarnivoreTargetStrategy : ITargetStrategy
 
         return GetClosestEdibleCreature(thisCreature.transform, hits);
     }
+
+    public void Notify(IPreySubject subject)
+    {
+
+    }
+
     private GameObject GetClosestEdibleCreature(Transform thisTransform, Collider[] hits)
     {
         GameObject closest = null;
@@ -26,6 +32,10 @@ public class CarnivoreTargetStrategy : ITargetStrategy
                 minDistance = distance;
                 closest = hit.gameObject;
             }
+        }
+        if(closest != null)
+        {
+            closest.GetComponent<IPreySubject>().Add(this);
         }
         return closest;
     }

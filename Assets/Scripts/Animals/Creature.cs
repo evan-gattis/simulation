@@ -8,7 +8,6 @@ abstract public class Creature : MonoBehaviour
     [SerializeField] NavMeshAgent navMeshComponent;
     IEatStrategy eatStrategy;
     ITargetStrategy targetStrategy;
-    private GameObject currentTarget;
     private CreatureState currentState;
     Coroutine idleCoroutine;
     Coroutine targetCoroutine;
@@ -16,9 +15,9 @@ abstract public class Creature : MonoBehaviour
     float idleWanderInterval = 3f;
     float targetInterval = 1f;
     float checkStateInterval = 0.5f;
-    float eatRadius = 1.5f;
     protected float starveTime = 30f;
     float currentHungerTime;
+    private bool isDead = false;
     IEnumerator WanderRoutine()
     {
         while (true)
@@ -42,9 +41,9 @@ abstract public class Creature : MonoBehaviour
     {
         while (true)
         {
-            if(currentTarget != null)
+            if(targetStrategy.CurrentTarget != null)
             {
-                if (NavMesh.SamplePosition(currentTarget.transform.position,
+                if (NavMesh.SamplePosition(targetStrategy.CurrentTarget.transform.position,
                     out NavMeshHit hit,
                     5f,
                     NavMesh.AllAreas))
@@ -118,6 +117,7 @@ abstract public class Creature : MonoBehaviour
     private void eat(IEdible food)
     {
         if (this.eatStrategy == null) return;
+        if (isDead) return; //Destroy() is called at the end of every frame, so need to check if we are dead.
         eatStrategy.eat(food);
         currentHungerTime = starveTime;
     }
@@ -128,7 +128,9 @@ abstract public class Creature : MonoBehaviour
     private void checkState()
     {
         if(this.targetStrategy == null) return;
-        currentTarget = targetStrategy.FindTargetIfAny(gameObject);
+        if(isDead) return;
+        targetStrategy.FindTargetIfAny(gameObject);
+        GameObject currentTarget = targetStrategy.CurrentTarget;
         if (currentTarget == null)
         {
             currentState = CreatureState.Idle;
@@ -136,11 +138,10 @@ abstract public class Creature : MonoBehaviour
         else
         {
             currentState = CreatureState.Targeting;
-            float sqrDistance = (gameObject.transform.position - currentTarget.transform.position).sqrMagnitude;
-            if (sqrDistance < eatRadius * eatRadius)
+            if (eatStrategy != null && eatStrategy.CanEat(gameObject, currentTarget))
             {
                 var edible = currentTarget.GetComponent<IEdible>();
-                if (edible != null)
+                if (edible != null && edible.IsAvailable)
                 {
                     eat(edible);
                 }
@@ -163,7 +164,10 @@ abstract public class Creature : MonoBehaviour
     }
     protected void Die()
     {
+        if (isDead) return;
+        isDead = true;
         StopAllCoroutines();
+        CancelInvoke();
         if(navMeshComponent != null && navMeshComponent.isActiveAndEnabled)
         {
             navMeshComponent.isStopped = true;
@@ -171,9 +175,11 @@ abstract public class Creature : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+    public bool IsDead => isDead;
+    public bool IsAvailable => !isDead;
     public GameObject GetCurrentTarget()
     {
-        return currentTarget;
+        return targetStrategy?.CurrentTarget;
     }
 }
 

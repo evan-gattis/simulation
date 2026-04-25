@@ -836,7 +836,7 @@ MonoBehaviour:
   - {fileID: 6437125902758381261, guid: 7d8fd04805106334291853ecc052b829, type: 3}
   resourcePrefabs:
   - {fileID: 739102170913299316, guid: 16c8a940fa8fc474f9e7380d73666d64, type: 3}
-  startingNumberOfCreatures: 10
+  startingNumberOfCreatures: 30
   startingNumberOfResources: 20
   simulationMinXBound: -50
   simulationMaxXBound: 50

@@ -1,15 +1,18 @@
-using UnityEditor.Build;
 using UnityEngine;
 
-public class Wolf : Creature
-
+public class Wolf : Creature, IEdible
 {
+    public void OnEaten()
+    {
+        Debug.Log("Wolf was eaten by a competing wolf!");
+        Die();
+    }
+
     void Awake()
     {
         SetEatStrategy(new CarnivoreEatStrategy());
-        SetTargetStrategy(new CarnivoreTargetStrategy());
+        var targetStrategy = new CarnivoreTargetStrategy();
+        targetStrategy.OwnerCreature = gameObject;
+        SetTargetStrategy(targetStrategy);
     }
-
-
-
 }

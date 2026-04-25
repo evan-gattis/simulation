@@ -30,6 +30,11 @@ abstract public class Creature : MonoBehaviour
                 navMeshComponent.remainingDistance <= navMeshComponent.stoppingDistance
             );
 
+            if(navMeshComponent == null || !navMeshComponent.isActiveAndEnabled)
+            {
+                yield break;
+            }
+
             yield return new WaitForSeconds(idleWanderInterval);
         }
     }
@@ -158,6 +163,12 @@ abstract public class Creature : MonoBehaviour
     }
     protected void Die()
     {
+        StopAllCoroutines();
+        if(navMeshComponent != null && navMeshComponent.isActiveAndEnabled)
+        {
+            navMeshComponent.isStopped = true;
+            navMeshComponent.enabled = false;
+        }
         Destroy(this.gameObject);
     }
     public GameObject GetCurrentTarget()

@@ -13,7 +13,7 @@ public class Sheep : Creature, IEdible, IPreySubject
     {
         Debug.Log("Sheep was eaten");
         NotifyObservers();
-        Destroy(gameObject);
+        Die();
     }
 
     public void Add(IPreyObserver observer)

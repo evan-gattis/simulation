@@ -16,6 +16,8 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private float floorLevel = -1;
     [SerializeField] private GameObject wolfPrefab;
     [SerializeField] private GameObject sheepPrefab;
+    private ICreatureFactory creatureFactory;
+    private EcosystemMap activeMap;
     void Start()
     {
         //Test cases:
@@ -24,24 +26,29 @@ public class SimulationManager : MonoBehaviour
         //StartCoroutine(TestSheepIdle(sheepPrefab));
         //StartCoroutine(TestWolfEatsSheep(wolfPrefab, sheepPrefab));
         //StartCoroutine(TestCreatureStarves(wolfPrefab));
+        creatureFactory = new CreatureFactory(wolfPrefab, sheepPrefab);
         DefaultSimulation();
     }
     private void DefaultSimulation()
     {
-        for (int i = 0; i < startingNumberOfResources; i++)
-        {
-            GameObject resourceToSpawn = resourcePrefabs[Random.Range(0, resourcePrefabs.Count)];
-            int randomXValue = Random.Range((int)simulationMinXBound, (int)simulationMaxXBound + 1);
-            int randomZValue = Random.Range((int)simulationMinZBound, (int)simulationMaxZBound + 1);
-            Instantiate(resourceToSpawn, new Vector3(randomXValue, floorLevel + 1, randomZValue), Quaternion.identity);
-        }
-        for (int i = 0; i < startingNumberOfCreatures; i++)
-        {
-            GameObject creatureToSpawn = creaturePrefabs[Random.Range(0, creaturePrefabs.Count)];
-            int randomXValue = Random.Range((int)simulationMinXBound, (int)simulationMaxXBound + 1);
-            int randomZValue = Random.Range((int)simulationMinZBound, (int)simulationMaxZBound + 1);
-            Instantiate(creatureToSpawn, new Vector3(randomXValue, floorLevel + 1, randomZValue), Quaternion.identity);
-        }
+        // for (int i = 0; i < startingNumberOfResources; i++)
+        // {
+        //     GameObject resourceToSpawn = resourcePrefabs[Random.Range(0, resourcePrefabs.Count)];
+        //     int randomXValue = Random.Range((int)simulationMinXBound, (int)simulationMaxXBound + 1);
+        //     int randomZValue = Random.Range((int)simulationMinZBound, (int)simulationMaxZBound + 1);
+        //     Instantiate(resourceToSpawn, new Vector3(randomXValue, floorLevel + 1, randomZValue), Quaternion.identity);
+        // }
+        // for (int i = 0; i < startingNumberOfCreatures; i++)
+        // {
+        //     GameObject creatureToSpawn = creaturePrefabs[Random.Range(0, creaturePrefabs.Count)];
+        //     int randomXValue = Random.Range((int)simulationMinXBound, (int)simulationMaxXBound + 1);
+        //     int randomZValue = Random.Range((int)simulationMinZBound, (int)simulationMaxZBound + 1);
+        //     Instantiate(creatureToSpawn, new Vector3(randomXValue, floorLevel + 1, randomZValue), Quaternion.identity);
+        // }
+        IMapBuilder mapBuilder = new EcosystemMapBuilder();
+        activeMap = mapBuilder.SetBounds(simulationMinXBound, simulationMaxXBound, simulationMinZBound, simulationMaxZBound, floorLevel)
+        .SpawnResources(startingNumberOfResources, resourcePrefabs)
+        .SpawnCreatures(startingNumberOfCreatures, creatureFactory).Build();
     }
 
     IEnumerator TestWolfTargetsSheep(GameObject wolfPrefab, GameObject sheepPrefab)

@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
-
-public class CreatureFactory : ICreatureFactory
+public class CreatureFactory
 {
     private GameObject baseWolf;
     private GameObject baseSheep;
@@ -15,26 +12,19 @@ public class CreatureFactory : ICreatureFactory
         this.baseSheep = sheep;
     }
 
-    public GameObject createWolf(UnityEngine.Vector3 position)
+    public GameObject createWolf(Vector3 position)
     {
-        return UnityEngine.Object.Instantiate(baseWolf, position, UnityEngine.Quaternion.identity);
+        return Object.Instantiate(baseWolf, position, Quaternion.identity);
     }
 
-    public GameObject createSheep(UnityEngine.Vector3 position)
+    public GameObject createSheep(Vector3 position)
     {
-        return UnityEngine.Object.Instantiate(baseSheep, position, UnityEngine.Quaternion.identity);
+        return Object.Instantiate(baseSheep, position, Quaternion.identity);
     }
 
-    public GameObject createRandomCreature(UnityEngine.Vector3 position)
+    public GameObject createRandomCreature(Vector3 position)
     {
-        int coin = UnityEngine.Random.Range(0,2);
-        if(coin == 0)
-        {
-            return createWolf(position);
-        }
-        else
-        {
-            return createSheep(position);
-        }
+        int coin = Random.Range(0, 2);
+        return coin == 0 ? createWolf(position) : createSheep(position);
     }
 }

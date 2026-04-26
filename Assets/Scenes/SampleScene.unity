@@ -832,8 +832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePrefabs:
-  - {fileID: 8275810971719572228, guid: 37c8f0b6f19e790489dd1668346963e4, type: 3}
-  - {fileID: 6437125902758381261, guid: 7d8fd04805106334291853ecc052b829, type: 3}
+  - {fileID: 6437125902758381261, guid: 9dac7a15e62efce4880ade0e7b5dc1bd, type: 3}
+  - {fileID: 8275810971719572228, guid: d00581c3388a6344192b994c160fe660, type: 3}
   resourcePrefabs:
   - {fileID: 739102170913299316, guid: 16c8a940fa8fc474f9e7380d73666d64, type: 3}
   startingNumberOfCreatures: 30
@@ -843,8 +843,8 @@ MonoBehaviour:
   simulationMinZBound: -50
   simulationMaxZBound: 50
   floorLevel: -1
-  wolfPrefab: {fileID: 8275810971719572228, guid: 37c8f0b6f19e790489dd1668346963e4, type: 3}
-  sheepPrefab: {fileID: 6437125902758381261, guid: 7d8fd04805106334291853ecc052b829, type: 3}
+  wolfPrefab: {fileID: 8275810971719572228, guid: d00581c3388a6344192b994c160fe660, type: 3}
+  sheepPrefab: {fileID: 6437125902758381261, guid: 9dac7a15e62efce4880ade0e7b5dc1bd, type: 3}
 --- !u!1 &1401290353
 GameObject:
   m_ObjectHideFlags: 0
